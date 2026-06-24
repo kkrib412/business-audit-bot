@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AI-powered website audit tool that analyzes SEO, accessibility, and generates actionable PDF reports">
     <title>Business Audit Bot - AI-Powered Website Auditing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,287 +15,342 @@
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --dark-soft: #1e293b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
         
-        /* Header */
+        /* Hero Section */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
             color: white;
-            padding: 80px 0;
+            padding: 120px 0 140px;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
             text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .hero-badge::before {
+            content: '✨';
+            font-size: 1.2rem;
         }
         
         header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
+            font-size: 4rem;
+            margin-bottom: 24px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         header p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+            font-size: 1.375rem;
+            margin-bottom: 48px;
             opacity: 0.95;
+            line-height: 1.7;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
         }
         
         .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            margin: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
             background: white;
-            color: #667eea;
+            color: var(--primary);
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-size: 1.05rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         
         .btn-secondary {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Stats Section */
+        .stats {
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 80px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
         }
         
         /* Features Section */
         .features {
-            padding: 80px 0;
-            background: white;
+            padding: 100px 0;
+            background: linear-gradient(180deg, white 0%, var(--light) 100%);
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: #2c3e50;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 80px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
         }
         
         .feature-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
         }
         
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
         }
         
         .feature-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-weight: 700;
         }
         
         .feature-card p {
-            color: #666;
+            color: var(--gray);
             line-height: 1.8;
+            font-size: 1.05rem;
         }
-        
-        /* How It Works */
-        .how-it-works {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-        
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .step {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: #667eea;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .step h3 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        
-        .step p {
-            color: #666;
-        }
-        
-        /* Code Example */
-        .code-section {
-            padding: 80px 0;
-            background: #2c3e50;
-            color: white;
-        }
-        
-        .code-section .section-title {
-            color: white;
-        }
-        
-        pre {
-            background: #1a252f;
-            padding: 30px;
-            border-radius: 12px;
-            overflow-x: auto;
-            margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        code {
-            color: #a8dadc;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-        }
-        
-        .command {
-            color: #52b788;
-        }
-        
-        .comment {
-            color: #8b9eb3;
-        }
-        
-        /* Use Cases */
-        .use-cases {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .use-case-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .use-case {
-            padding: 30px;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            border-radius: 12px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .use-case h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-        
-        .use-case p {
-            color: #666;
-        }
-        
-        /* Footer CTA */
-        .footer-cta {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .footer-cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .footer-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
-        }
-        
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        footer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            header p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .btn {
-                display: block;
-                margin: 10px auto;
-                max-width: 300px;
-            }
-        }
-    </style>
-</head>
-<body>
+
     <header>
         <div class="container">
-            <h1>🔍 Business Audit Bot</h1>
-            <p>AI-powered website auditing that finds issues and delivers actionable insights</p>
-            <a href="https://github.com/kkrib412/business-audit-bot" class="btn" target="_blank">View on GitHub</a>
-            <a href="#get-started" class="btn btn-secondary">Get Started</a>
+            <div class="hero-content">
+                <div class="hero-badge">Open Source · AI-Powered · Production Ready</div>
+                <h1>
+                    <span class="gradient-text">Business Audit Bot</span>
+                </h1>
+                <p>
+                    Automated website auditing that finds SEO and accessibility issues, then delivers 
+                    AI-powered recommendations in professional PDF reports
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/kkrib412/business-audit-bot" class="btn" target="_blank">
+                        <span>📦</span>
+                        View on GitHub
+                    </a>
+                    <a href="#get-started" class="btn btn-secondary">
+                        <span>🚀</span>
+                        Get Started
+                    </a>
+                </div>
+            </div>
         </div>
     </header>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Pages Crawled</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Check Types</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Powered Insights</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="features">
         <div class="container">
             <h2 class="section-title">Why Business Audit Bot?</h2>
+            <p class="section-subtitle">
+                Everything you need to deliver professional website audits—automated, intelligent, and ready to deploy
+            </p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🚀</div>
@@ -322,7 +380,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Fast & Simple</h3>
-                    <p>Single command operation - no complex setup or configuration required</p>
+                    <p>Single command operation—no complex setup or configuration required</p>
                 </div>
             </div>
         </div>
@@ -331,26 +389,43 @@
     <section class="how-it-works">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Crawl</h3>
-                    <p>Enter a website URL and the bot crawls key pages using a headless browser</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Analyze</h3>
-                    <p>Runs comprehensive SEO and accessibility checks on every page discovered</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Generate</h3>
-                    <p>AI processes findings and creates personalized, actionable recommendations</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Report</h3>
-                    <p>Outputs a professional PDF report with prioritized issues and solutions</p>
+            <p class="section-subtitle">
+                Four simple steps from URL to actionable insights
+            </p>
+            <div class="steps-container">
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-icon-wrapper">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">🔍</div>
+                        </div>
+                        <h3>Crawl</h3>
+                        <p>Enter a website URL and the bot crawls key pages using a headless browser</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrapper">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">🔬</div>
+                        </div>
+                        <h3>Analyze</h3>
+                        <p>Runs comprehensive SEO and accessibility checks on every page discovered</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrapper">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">✨</div>
+                        </div>
+                        <h3>Generate</h3>
+                        <p>AI processes findings and creates personalized, actionable recommendations</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrapper">
+                            <div class="step-number">4</div>
+                            <div class="step-icon">📋</div>
+                        </div>
+                        <h3>Report</h3>
+                        <p>Outputs a professional PDF report with prioritized issues and solutions</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -359,11 +434,20 @@
     <section class="code-section" id="get-started">
         <div class="container">
             <h2 class="section-title">Quick Start</h2>
-            <pre><code><span class="comment"># Clone the repository</span>
+            <p class="section-subtitle">
+                Get up and running in under 5 minutes
+            </p>
+            <div class="code-wrapper">
+                <div class="code-header">
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                </div>
+                <pre><code><span class="comment"># Clone the repository</span>
 <span class="command">git clone https://github.com/kkrib412/business-audit-bot.git</span>
 <span class="command">cd business-audit-bot</span>
 
-<span class="comment"># Install dependencies</span>
+<span class="comment"># Create virtual environment and install dependencies</span>
 <span class="command">python -m venv venv</span>
 <span class="command">source venv/bin/activate</span>  <span class="comment"># On Windows: venv\Scripts\activate</span>
 <span class="command">pip install -r requirements.txt</span>
@@ -371,40 +455,48 @@
 
 <span class="comment"># Set up your OpenAI API key</span>
 <span class="command">cp .env.example .env</span>
-<span class="comment"># Edit .env and add: OPENAI_API_KEY=your_key_here</span>
+<span class="comment"># Edit .env and add your API key</span>
 
-<span class="comment"># Run an audit!</span>
-<span class="command">python audit.py https://example.com</span></code></pre>
+<span class="comment"># Run your first audit!</span>
+<span class="command">python audit.py https://example.com</span>
+
+<span class="comment"># Customize the scan</span>
+<span class="command">python audit.py https://yoursite.com --max-pages 10</span>
+<span class="command">python audit.py https://yoursite.com --output ./reports --no-ai</span></code></pre>
+            </div>
         </div>
     </section>
 
     <section class="use-cases">
         <div class="container">
             <h2 class="section-title">Perfect For</h2>
-            <div class="use-case-list">
+            <p class="section-subtitle">
+                Whether you're an agency, freelancer, or startup—automate your audits
+            </p>
+            <div class="use-cases-grid">
                 <div class="use-case">
                     <h3>🏢 Digital Agencies</h3>
-                    <p>Deliver professional audits to clients quickly and consistently</p>
+                    <p>Deliver professional audits to clients quickly and consistently without manual work</p>
                 </div>
                 <div class="use-case">
                     <h3>💼 Freelance Consultants</h3>
-                    <p>Generate lead magnets and onboarding reports for new clients</p>
+                    <p>Generate lead magnets and onboarding reports for new clients in minutes</p>
                 </div>
                 <div class="use-case">
                     <h3>🛠️ Web Developers</h3>
-                    <p>QA checks before launching client sites or major updates</p>
+                    <p>Run QA checks before launching client sites or pushing major updates</p>
                 </div>
                 <div class="use-case">
                     <h3>📈 Marketing Teams</h3>
-                    <p>Regular SEO health checks and competitor analysis</p>
+                    <p>Schedule regular SEO health checks and track competitor performance</p>
                 </div>
                 <div class="use-case">
                     <h3>🎓 Learning Projects</h3>
-                    <p>Study web scraping, AI integration, and report generation</p>
+                    <p>Study web scraping, AI integration, and automated report generation</p>
                 </div>
                 <div class="use-case">
                     <h3>🚀 Startups</h3>
-                    <p>Audit your own site regularly without expensive tools</p>
+                    <p>Audit your own site regularly without expensive enterprise tools</p>
                 </div>
             </div>
         </div>
@@ -413,8 +505,11 @@
     <section class="footer-cta">
         <div class="container">
             <h2>Ready to Start Auditing?</h2>
-            <p>Open source, free to use, and ready to deploy</p>
-            <a href="https://github.com/kkrib412/business-audit-bot" class="btn" target="_blank">Get Started on GitHub</a>
+            <p>Open source, free to use, and ready to deploy in minutes</p>
+            <a href="https://github.com/kkrib412/business-audit-bot" class="btn" target="_blank">
+                <span>📦</span>
+                Get Started on GitHub
+            </a>
         </div>
     </section>
 
