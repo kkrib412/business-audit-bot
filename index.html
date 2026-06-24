@@ -300,6 +300,162 @@
             line-height: 1.8;
             font-size: 1.05rem;
         }
+        
+        /* How It Works - Button Style */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+        
+        .step {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(99, 102, 241, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .step:hover {
+            border-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
+            transform: translateY(-6px);
+        }
+        
+        .step-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .step:hover .step-icon-wrapper {
+            transform: scale(1.05);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.4);
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+        }
+        
+        .step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .step p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* Use Cases - Button Style */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-top: 60px;
+        }
+        
+        .use-case {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            border: 2px solid rgba(99, 102, 241, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .use-case::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .use-case:nth-child(2)::before {
+            background: linear-gradient(180deg, var(--secondary), var(--accent));
+        }
+        
+        .use-case:nth-child(3)::before {
+            background: linear-gradient(180deg, var(--accent), var(--primary));
+        }
+        
+        .use-case:nth-child(4)::before {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+        
+        .use-case:nth-child(5)::before {
+            background: linear-gradient(180deg, var(--secondary), var(--accent));
+        }
+        
+        .use-case:nth-child(6)::before {
+            background: linear-gradient(180deg, var(--accent), var(--primary));
+        }
+        
+        .use-case:hover::before {
+            width: 100%;
+            opacity: 0.06;
+        }
+        
+        .use-case:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .use-case h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .use-case p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
